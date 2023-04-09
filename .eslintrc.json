@@ -9,6 +9,6 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
-  "rules": ["no-console"],
+  "rules": { "no-console": "off" },
   "plugins": ["prettier"]
 }

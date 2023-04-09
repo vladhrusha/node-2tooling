@@ -1,6 +1,6 @@
 {
   "env": {
-    "browser": true,
+    "node": true,
     "commonjs": true,
     "es2021": true
   },
@@ -9,6 +9,6 @@
   "parserOptions": {
     "ecmaVersion": "latest"
   },
-  "rules": { "no-console": "off" },
+  "rules": { "no-console": "error" },
   "plugins": ["prettier"]
 }

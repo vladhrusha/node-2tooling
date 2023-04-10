@@ -1,4 +1,3 @@
-/* eslint-disable */
 const fs = require("node:fs");
 const cliProgress = require("cli-progress");
 const { promisify } = require("util");
@@ -24,7 +23,7 @@ const countCountriesWhileIndicatingProgress = async () => {
   const countriesCounter = new Map();
   let barCounter = 0;
 
-  var fileSizeInMegaBytes = Math.round(
+  const fileSizeInMegaBytes = Math.round(
     fs.statSync(filePath).size / 1024 / 1024,
   );
   bar1.start(fileSizeInMegaBytes, barCounter);
@@ -39,7 +38,7 @@ const countCountriesWhileIndicatingProgress = async () => {
   });
 
   for await (const line of rl) {
-    let country = line.slice(0, line.indexOf(","));
+    const country = line.slice(0, line.indexOf(","));
     countriesCounter.set(country, countriesCounter.get(country) + 1 || 1);
   }
 
@@ -54,16 +53,19 @@ const countCountriesWhileIndicatingProgress = async () => {
 const startTimestamp = Date.now();
 countCountriesWhileIndicatingProgress()
   .then((values) => {
+    // eslint-disable-next-line
     console.log(values);
     const endTimestamp = Date.now();
     const secondsElapsed = Math.round((endTimestamp - startTimestamp) / 1000);
+    // eslint-disable-next-line
     console.log(`Stopped after ${secondsElapsed} seconds`);
   })
   .catch((err) => {
     process.on("exit", (code) => {
+      // eslint-disable-next-line
+      console.log("Inside error, fetching product line items failed", err);
+      // eslint-disable-next-line
       console.log(`About to exit with code: ${code}`);
     });
     process.exit(1);
   });
-
-/* eslint-enable */

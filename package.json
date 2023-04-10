@@ -34,5 +34,8 @@
     "hooks": {
       "pre-commit": "lint-staged"
     }
+  },
+  "dependencies": {
+    "cli-progress": "^3.12.0"
   }
 }

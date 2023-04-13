@@ -38,7 +38,7 @@ const countCountriesWhileIndicatingProgress = async () => {
   });
   for await (const line of rl) {
     const country = line.slice(0, line.indexOf(","));
-    countriesCounter.set(country, countriesCounter.get(country) + 1 || 2);
+    countriesCounter.set(country, countriesCounter.get(country) + 1 || 1);
   }
 
   const onClose = promisify(input.on).bind(input);

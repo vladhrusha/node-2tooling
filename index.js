@@ -17,7 +17,7 @@ const countCountriesWhileIndicatingProgress = async () => {
     },
     cliProgress.Presets.shades_classic,
   );
-  const filePath = "../free_company_dataset.csv";
+  const filePath = "Book1.csv";
   const input = fs.createReadStream(filePath);
   const rl = readline.createInterface({ input, output });
   const countriesCounter = new Map();
@@ -36,7 +36,6 @@ const countCountriesWhileIndicatingProgress = async () => {
     bar1.update(Math.round(barCounter / 1024 / 1024));
     bar1.updateETA();
   });
-
   for await (const line of rl) {
     const country = line.slice(0, line.indexOf(","));
     countriesCounter.set(country, countriesCounter.get(country) + 1 || 1);

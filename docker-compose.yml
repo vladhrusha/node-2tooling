@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  web:
+      build: .
+      ports:
+      - "3000:3000"
+      depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+      networks:
+      - myapp
+  postgres:
+    image: postgres:latest
+    environment:
+      - DB_URL=postgresql://postgres:password@localhost:5432/nodejs-db
+    ports:
+      - "5432:5432"
+    networks:
+      - myapp
+  rabbitmq:
+    image: rabbitmq:latest
+    environment:
+      - BUS_URL=amqp://user:pass@localhost:5672
+    ports:
+      - "5672:5672"
+    networks:
+      - myapp
+  redis:
+    image: redis:latest
+    environment:
+      - CACHE_URL=redis://localhost:6379
+    ports:
+      - "6379:6379"
+    networks:
+      - myapp
+
+
+networks:
+  myapp:

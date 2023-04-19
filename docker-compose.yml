@@ -15,7 +15,7 @@ services:
   postgres:
     image: postgres:latest
     environment:
-      - DB_URL=postgresql://postgres:password@localhost:${HOST_PORT_POSTGRES}/nodejs-db
+      - DB_URL=postgresql://postgres:${PASSWORD_POSTGRES}@${HOST_IP_POSTGRES}:${HOST_PORT_POSTGRES}/nodejs-db
     ports:
       - "${HOST_PORT_POSTGRES}:${CONTAINER_PORT_POSTGRES}"
     networks:
@@ -23,9 +23,9 @@ services:
     env_file:
       - .env
   rabbitmq:
-    image: rabbitmq:latest
+    image: rabbitmq:${VERSION_RABBITMQ}
     environment:
-      - BUS_URL=amqp://user:pass@localhost:${HOST_PORT_RABBITMQ}
+      - BUS_URL=amqp://${USER_RABBITMQ}:${PASSWORD_RABBITMQ}@${HOST_IP_RABBITMQ}:${HOST_PORT_RABBITMQ}
     ports:
       - "${HOST_PORT_RABBITMQ}:${CONTAINER_PORT_RABBITMQ}"
     networks:
@@ -35,7 +35,7 @@ services:
   redis:
     image: redis:latest
     environment:
-      - CACHE_URL=redis://localhost:${HOST_PORT_REDIS}
+      - CACHE_URL=redis://${HOST_IP_REDIS}:${HOST_PORT_REDIS}
     ports:
       - "${HOST_PORT_REDIS}:${CONTAINER_PORT_REDIS}"
     networks:

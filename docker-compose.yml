@@ -1,0 +1,48 @@
+version: "3.9"
+services:
+  web:
+      build: .
+      ports:
+      - "${HOST_PORT}:${CONTAINER_PORT}"
+      depends_on:
+      - postgres
+      - rabbitmq
+      - redis
+      networks:
+      - myapp
+      env_file:
+      - .env
+  postgres:
+    image: postgres:latest
+    environment:
+      - DB_URL=postgresql://${USER_POSTGRES}:${PASSWORD_POSTGRES}@${HOST_IP_POSTGRES}:${HOST_PORT_POSTGRES}/nodejs-db
+    ports:
+      - "${HOST_PORT_POSTGRES}:${CONTAINER_PORT_POSTGRES}"
+    networks:
+      - myapp
+    env_file:
+      - .env
+  rabbitmq:
+    image: rabbitmq:${VERSION_RABBITMQ}
+    environment:
+      - BUS_URL=amqp://${USER_RABBITMQ}:${PASSWORD_RABBITMQ}@${HOST_IP_RABBITMQ}:${HOST_PORT_RABBITMQ}
+    ports:
+      - "${HOST_PORT_RABBITMQ}:${CONTAINER_PORT_RABBITMQ}"
+    networks:
+      - myapp
+    env_file:
+      - .env
+  redis:
+    image: redis:latest
+    environment:
+      - CACHE_URL=redis://${HOST_IP_REDIS}:${HOST_PORT_REDIS}
+    ports:
+      - "${HOST_PORT_REDIS}:${CONTAINER_PORT_REDIS}"
+    networks:
+      - myapp
+    env_file:
+      - .env
+
+
+networks:
+  myapp:

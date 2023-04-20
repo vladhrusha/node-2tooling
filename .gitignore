@@ -1,4 +1,5 @@
 node_modules
 .eslintcache
-free_company_dataset.csv
-Book1.csv
+code/free_company_dataset.csv
+code/Book1.csv
+sequenceDiagram.txt

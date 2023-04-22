@@ -10,5 +10,5 @@ heroku create task2
 heroku container:push web
 heroku container:release web
 heroku open
-//heroku open routes to task2.herokuapp.com
+//"heroku open" routes to task2.herokuapp.com
 //navigate task2.herokuapp.com/random or task2.herokuapp.com/healthz

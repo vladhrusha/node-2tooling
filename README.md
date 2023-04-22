@@ -1,7 +1,8 @@
 # Task 2 Tooling
 
-docker build . -t task2
-docker run task2
+<!-- docker build . -t task2
+docker run task2 -->
+
 npm install -g heroku
 heroku --version
 heroku login
